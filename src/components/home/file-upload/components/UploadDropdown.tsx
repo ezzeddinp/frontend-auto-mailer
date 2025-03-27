@@ -39,14 +39,15 @@ const UploadDropdown: React.FC<UploadDropdownProps> = ({
       if (file.type.includes("spreadsheet") || file.type === "text/csv") {
         setFiles(file, zipFile, pdfFile); // Update hanya Excel
       } else if (
-        file.type === "application/pdf" ||
-        file.type === "application/zip"
+        file.type === "application/zip" || 
+        file.type === "application/x-zip-compressed" ||
+        file.name.toLowerCase().endsWith('.zip')
       ) {
         setFiles(
           excelFile,
-          file.type === "application/zip" ? file : zipFile,
-          file.type === "application/pdf" ? file : pdfFile
-        ); // Update ZIP/PDF sesuai jenisnya
+          file,
+          pdfFile
+        );
       }
     }
   };
